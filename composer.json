@@ -1,6 +1,7 @@
 {
     "name": "anahkiasen/seonset",
-    "description": "",
+    "description": "SEO handler for Laravel 4, with customization of slugs, meta data and more",
+    "license": "MIT",
     "authors": [
         {
             "name": "Maxime Fabre",
