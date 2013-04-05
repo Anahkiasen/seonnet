@@ -61,7 +61,7 @@ class MakeTableCommand extends Command {
    */
   protected function createBaseMigration()
   {
-    $name = 'create_seonnet_table';
+    $name = 'create_seonnet';
 
     $path = $this->laravel['path'].'/database/migrations';
 

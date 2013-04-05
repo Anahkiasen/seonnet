@@ -21,8 +21,24 @@ class Seonnet
   public function __construct(Container $app)
   {
     $this->app   = $app;
-    $this->route = $this->getCurrentRoute();
-    var_dump($this->tableExists()); exit();
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  ///////////////////////////// CORE METHODS /////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  /**
+   * Returns the slug for an URL
+   *
+   * @param string $url The URL
+   *
+   * @return string The slug
+   */
+  public static function slug($url)
+  {
+    $route = Route::findRoute($url);
+
+    return $route->slug ?: $url;
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -36,17 +52,29 @@ class Seonnet
    */
   protected function tableExists()
   {
-    return $this->app['db']->tableExists('seonnet');
+    $schemaBuilder = $this->app['db']->connection()->getSchemaBuilder();
+
+    return $schemaBuilder->hasTable('seonnet');
   }
 
   /**
-   * Get the current route
+   * Get the current URL
    *
    * @return string
    */
-  protected function getCurrentRoute()
+  protected function getCurrentUrl()
   {
     return $this->app['request']->path();
+  }
+
+  /**
+   * Get the current Route
+   *
+   * @return Route
+   */
+  protected function getCurrentRoute()
+  {
+    return Route::findRoute($this->getCurrentUrl());
   }
 
 }

@@ -7,6 +7,7 @@ class CreateSeonnet extends Migration
     Schema::create('seonnet', function($table) {
       $table->increments('id');
         $table->string('route');
+        $table->string('slug');
         $table->string('title');
         $table->text('meta');
         $table->string('lang');
