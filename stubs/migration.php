@@ -1,10 +1,10 @@
 <?php
 
-class CreateSeonset extends Migration
+class CreateSeonnet extends Migration
 {
   public function up()
   {
-    Schema::create('seonset', function($table) {
+    Schema::create('seonnet', function($table) {
       $table->increments('id');
         $table->string('route');
         $table->string('title');
@@ -16,6 +16,6 @@ class CreateSeonset extends Migration
 
   public function down()
   {
-    Schema::drop('seonset');
+    Schema::drop('seonnet');
   }
 }

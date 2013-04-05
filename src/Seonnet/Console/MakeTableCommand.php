@@ -1,5 +1,5 @@
 <?php
-namespace Seonset\Console;
+namespace Seonnet\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -11,14 +11,14 @@ class MakeTableCommand extends Command {
    *
    * @var string
    */
-  protected $name = 'seonset:table';
+  protected $name = 'seonnet:table';
 
   /**
    * The console command description.
    *
    * @var string
    */
-  protected $description = 'Create a migration for the seonset meta table';
+  protected $description = 'Create a migration for the seonnet meta table';
 
   /**
    * The filesystem instance.
@@ -61,7 +61,7 @@ class MakeTableCommand extends Command {
    */
   protected function createBaseMigration()
   {
-    $name = 'create_seonset_table';
+    $name = 'create_seonnet_table';
 
     $path = $this->laravel['path'].'/database/migrations';
 

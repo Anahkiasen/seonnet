@@ -1,8 +1,8 @@
-<?php namespace Seonset;
+<?php namespace Seonnet;
 
 use Illuminate\Support\ServiceProvider;
 
-class SeonsetServiceProvider extends ServiceProvider {
+class SeonnetServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -18,22 +18,32 @@ class SeonsetServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->registerSeonnet();
 		$this->registerCommands();
 	}
 
+	protected function registerSeonnet()
+	{
+		$app = $this->app;
+
+		$this->app->bind('seonnet', function($app) {
+			return new Seonnet($app);
+		});
+	}
+
 	/**
-	 * Register Seonset's commands
+	 * Register Seonnet's commands
 	 */
 	protected function registerCommands()
 	{
 		$app = $this->app;
 
-		$app['command.seonset.database'] = $app->share(function($app)
+		$app['command.seonnet.database'] = $app->share(function($app)
 		{
 			return new Console\MakeTableCommand($app['files']);
 		});
 
-		$this->commands('command.seonset.database');
+		$this->commands('command.seonnet.database');
 	}
 
 	/**

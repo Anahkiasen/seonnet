@@ -1,21 +1,21 @@
 {
-    "name": "anahkiasen/seonset",
-    "description": "SEO handler for Laravel 4, with customization of slugs, meta data and more",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Maxime Fabre",
-            "email": "ehtnam6@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": "4.0.x"
-    },
-    "autoload": {
-        "psr-0": {
-            "Seonset": "src/"
-        }
-    },
-    "minimum-stability": "dev"
+  "name": "anahkiasen/seonnet",
+  "description": "SEO handler for Laravel 4, with customization of slugs, meta data and more",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maxime Fabre",
+      "email": "ehtnam6@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "illuminate/support": "4.0.x"
+  },
+  "autoload": {
+    "psr-0": {
+      "Seonnet": "src/"
+    }
+  },
+  "minimum-stability": "dev"
 }
