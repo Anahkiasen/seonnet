@@ -18,7 +18,22 @@ class SeonsetServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->registerCommands();
+	}
+
+	/**
+	 * Register Seonset's commands
+	 */
+	protected function registerCommands()
+	{
+		$app = $this->app;
+
+		$app['command.seonset.database'] = $app->share(function($app)
+		{
+			return new Console\MakeTableCommand($app['files']);
+		});
+
+		$this->commands('command.seonset.database');
 	}
 
 	/**
