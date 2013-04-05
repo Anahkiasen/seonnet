@@ -24,6 +24,7 @@ class SeonnetServiceProvider extends ServiceProvider {
 
 	protected function registerSeonnet()
 	{
+
 		$app = $this->app;
 
 		// Bind database to the Model
@@ -32,6 +33,13 @@ class SeonnetServiceProvider extends ServiceProvider {
 		$this->app->bind('seonnet', function($app) {
 			return new Seonnet($app);
 		});
+
+		$this->app->bind('seonnet.router', function($app) {
+			return new Router($app);
+		});
+
+		\App::bind('router', $this->app['seonnet.router']);
+
 	}
 
 	/**
