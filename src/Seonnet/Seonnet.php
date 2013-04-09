@@ -3,6 +3,7 @@ namespace Seonnet;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Str;
+use Illuminate\Routing\Router;
 
 class Seonnet
 {
@@ -13,6 +14,13 @@ class Seonnet
    * @var Container
    */
   protected $app;
+
+  /**
+   * The Router
+   *
+   * @var Router
+   */
+  protected $router;
 
   /**
    * A cache of the matched routes
@@ -26,9 +34,15 @@ class Seonnet
    *
    * @param Container $app
    */
-  public function __construct(Container $app)
+  public function __construct(Container $app, Router $router)
   {
-    $this->app = $app;
+    $this->app    = $app;
+    $this->router = $router;
+  }
+
+  public function getRouter()
+  {
+    return $this->router;
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -56,7 +70,7 @@ class Seonnet
    *
    * @return string
    */
-  public function getTitle($fallback = null)
+  public function title($fallback = null)
   {
     $route = $this->getCurrentRoute();
     if(!$route) return $fallback;
@@ -69,7 +83,7 @@ class Seonnet
    *
    * @return string
    */
-  public function getMeta($route = null)
+  public function meta($route = null)
   {
     if (!$route) $route = $this->getCurrentUrl();
     $route = $this->getRoute($route);

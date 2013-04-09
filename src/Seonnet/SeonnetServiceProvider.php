@@ -31,7 +31,7 @@ class SeonnetServiceProvider extends ServiceProvider {
 		Route::setConnectionResolver($app->db);
 
 		$this->app->bind('seonnet', function($app) {
-			return new Seonnet($app);
+			return new Seonnet($app, $app['router']);
 		});
 
 		$this->app->singleton('seonnet.router', function($app) {
