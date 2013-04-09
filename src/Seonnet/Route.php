@@ -25,25 +25,51 @@ class Route extends Model
    *
    * @return string
    */
-  public function getSlugAttribute($slug)
+  public function getSlugAttribute()
   {
-    return $slug ?: Str::slug($this->title);
+    $slug = $this->url ?: $this->title;
+
+    return Str::slug($slug);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  ///////////////////////////// REPOSITORY ///////////////////////////
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Get the meta tags as an array
+   *
+   * @param string $meta
+   *
+   * @return array
+   */
+  public function getMetaAttribute($meta)
+  {
+    return json_decode($meta, true);
+  }
 
   /**
-   * Find a Route by its route
+   * Get the meta tags as HTML tags
    *
-   * @param string $route The route
-   *
-   * @return Route
+   * @return string
    */
-  public static function findRoute($route)
+  public function getMetaTagsAttribute()
   {
-    return static::where('route', $route)->first();
+    $tags = $this->meta;
+    if (!$tags) return;
+
+    // Format tags
+    foreach ($tags as $name => &$tag) {
+      $tag = '<meta name="' .$name. '" content="' .$tag. '">';
+    }
+
+    return implode($tags);
+  }
+
+  /**
+   * Set the Route's meta tags
+   *
+   * @param array $meta
+   */
+  public function setMetaAttribute($meta)
+  {
+    $this->attributes['meta'] = json_encode($meta);
   }
 
 }
