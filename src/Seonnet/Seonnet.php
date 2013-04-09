@@ -2,6 +2,7 @@
 namespace Seonnet;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Str;
 
 class Seonnet
 {
@@ -43,7 +44,9 @@ class Seonnet
    */
   public function slug($url)
   {
-    return $route = $this->getRoute($url) ? $route->slug : $url;
+    $route = $this->getRoute($url);
+
+    return $route ? $route->slug : $url;
   }
 
   /**
@@ -99,7 +102,7 @@ class Seonnet
 
     // Search for a Route whose pattern matches the current URL
     foreach ($routes as $route) {
-      if (preg_match($route->route, $url) or $url == Str::slug($route->slug)) {
+      if (preg_match($route->pattern, $url) or $url == Str::slug($route->slug)) {
         $this->matchedRoutes[$url] = $route;
 
         return $route;

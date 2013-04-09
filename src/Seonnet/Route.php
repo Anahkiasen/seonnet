@@ -33,6 +33,18 @@ class Route extends Model
   }
 
   /**
+   * Get the Route's pattern
+   *
+   * @param string $pattern
+   *
+   * @return string
+   */
+  public function getPatternAttribute($pattern)
+  {
+    return '#'.$pattern.'#';
+  }
+
+  /**
    * Get the meta tags as an array
    *
    * @param string $meta
