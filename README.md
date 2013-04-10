@@ -17,7 +17,7 @@ You can add entries to this table by using the provided `seonnet/admin` route (n
 ```php
 Seonnet\Route::insert([
   'pattern' => 'agency/*',
-  'title'   => 'Our agency',
+  'title'   => 'Welcome to our agency',
   'meta'    => array(
     'description' => 'Interesting stuff about your agency'
   ),
@@ -26,12 +26,17 @@ Seonnet\Route::insert([
 ]);
 ```
 
-From there you registered a page. You now need to plug Seonnet into various places, first being your routes :
+To use Sonnet after that you'll need to replace Laravel's Router with Seonnet's by adding this line to your aliases array in `config/app.php` :
 
 ```php
-Route::get(Seonnet::slug('agency'), function() {
+'Route' => 'Seonnet\Facades\Route',
+```
+
+The magic will happen when you type this :
+
+```php
+Route::get('agency', function() {
   return View::make('agency');
 });
 ```
 
-From there, you will be able to access this page via both `agency` and `our-agency` (an automatic slug created from the `title` attribute of your Route model).

@@ -1,9 +1,10 @@
 <?php
 namespace Seonnet;
 
+use App;
 use Illuminate\Container\Container;
 use Illuminate\Support\Str;
-use Illuminate\Routing\Router;
+use Illuminate\Routing\Router as IlluminateRouter;
 
 class Seonnet
 {
@@ -34,7 +35,7 @@ class Seonnet
    *
    * @param Container $app
    */
-  public function __construct(Container $app, Router $router)
+  public function __construct(Container $app, IlluminateRouter $router)
   {
     $this->app    = $app;
     $this->router = $router;
@@ -56,11 +57,12 @@ class Seonnet
    *
    * @return string The slug
    */
-  public function slug($url)
+  public function getSlug($url)
   {
     $route = $this->getRoute($url);
+    $slug  = $route ? $route->slug : $url;
 
-    return $route ? $route->slug : $url;
+    return $slug;
   }
 
   /**
@@ -116,7 +118,9 @@ class Seonnet
 
     // Search for a Route whose pattern matches the current URL
     foreach ($routes as $route) {
-      if (preg_match($route->pattern, $url) or $url == Str::slug($route->slug)) {
+      if (preg_match($route->pattern, $url) or
+          $url == $route->slug or
+          $url == $route->name) {
         $this->matchedRoutes[$url] = $route;
 
         return $route;

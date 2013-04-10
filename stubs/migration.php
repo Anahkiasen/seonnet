@@ -6,6 +6,7 @@ class CreateSeonnet extends Migration
   {
     Schema::create('seonnet', function($table) {
       $table->increments('id');
+        $table->string('name');
         $table->string('pattern');
         $table->string('title');
         $table->text('meta');
