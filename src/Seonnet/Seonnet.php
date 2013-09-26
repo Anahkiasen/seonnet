@@ -8,7 +8,6 @@ use Illuminate\Routing\Router as IlluminateRouter;
 
 class Seonnet
 {
-
   /**
    * The IoC Container
    *
@@ -165,5 +164,4 @@ class Seonnet
 
     return $schemaBuilder->hasTable('seonnet');
   }
-
 }

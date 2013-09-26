@@ -1,12 +1,11 @@
 <?php
 namespace Seonnet;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Route extends Model
 {
-
   /**
    * The Seonnet table
    *
@@ -83,5 +82,4 @@ class Route extends Model
   {
     $this->attributes['meta'] = json_encode($meta);
   }
-
 }

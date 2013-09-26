@@ -9,7 +9,6 @@ use Illuminate\Container\Container;
 */
 class Router
 {
-
   /**
    * Build the Seonnet Router
    *
@@ -52,5 +51,4 @@ class Router
 
     return App::make('router')->$method($pattern, $action);
   }
-
 }

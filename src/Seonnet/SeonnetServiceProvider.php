@@ -2,15 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class SeonnetServiceProvider extends ServiceProvider {
-
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
-
+class SeonnetServiceProvider extends ServiceProvider
+{
 	/**
 	 * Register the service provider.
 	 *
@@ -22,9 +15,13 @@ class SeonnetServiceProvider extends ServiceProvider {
 		$this->registerCommands();
 	}
 
+	/**
+	 * Register Seonnet's classes
+	 *
+	 * @return void
+	 */
 	protected function registerSeonnet()
 	{
-
 		$app = $this->app;
 
 		// Bind database to the Model
@@ -47,22 +44,10 @@ class SeonnetServiceProvider extends ServiceProvider {
 	{
 		$app = $this->app;
 
-		$app['command.seonnet.database'] = $app->share(function($app)
-		{
+		$app['command.seonnet.database'] = $app->share(function($app) {
 			return new Console\MakeTableCommand($app['files']);
 		});
 
 		$this->commands('command.seonnet.database');
 	}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array();
-	}
-
 }
