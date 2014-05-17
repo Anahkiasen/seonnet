@@ -13,9 +13,8 @@
     "illuminate/support": "~4"
   },
   "autoload": {
-    "psr-0": {
-      "Seonnet": "src/"
+    "psr-4": {
+      "Seonnet\\": "src"
     }
-  },
-  "minimum-stability": "dev"
+  }
 }
