@@ -27,7 +27,7 @@ class SeonnetServiceProvider extends ServiceProvider
 		// Bind database to the Model
 		Route::setConnectionResolver($app->db);
 
-		$this->app->bind('seonnet', function($app) {
+		$this->app->singleton('seonnet', function($app) {
 			return new Seonnet($app, $app['router']);
 		});
 

@@ -23,6 +23,20 @@ class Seonnet
   protected $router;
 
   /**
+   * Whether the table for Seonnet exists or not
+   *
+   * @var boolean
+   */
+  protected $tableExists;
+
+  /**
+   * The existing routes
+   *
+   * @var Collection
+   */
+  protected $existing;
+
+  /**
    * A cache of the matched routes
    *
    * @var array
@@ -113,10 +127,13 @@ class Seonnet
       return $this->matchedRoutes[$url];
     }
 
-    $routes = Route::all();
+    // Get routes
+    if (!$this->existing) {
+      $this->existing = Route::all();
+    }
 
     // Search for a Route whose pattern matches the current URL
-    foreach ($routes as $route) {
+    foreach ($this->existing as $route) {
       if (preg_match($route->pattern, $url) or
           $url == $route->slug or
           $url == $route->name) {
@@ -160,8 +177,11 @@ class Seonnet
    */
   protected function tableExists()
   {
-    $schemaBuilder = $this->app['db']->connection()->getSchemaBuilder();
+    if (is_null($this->tableExists)) {
+      $schemaBuilder = $this->app['db']->connection()->getSchemaBuilder();
+      $this->tableExists = $schemaBuilder->hasTable('seonnet');
+    }
 
-    return $schemaBuilder->hasTable('seonnet');
+    return $this->tableExists;
   }
 }
