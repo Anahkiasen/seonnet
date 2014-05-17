@@ -3,7 +3,6 @@ namespace Seonnet;
 
 use App;
 use Illuminate\Container\Container;
-use Illuminate\Support\Str;
 use Illuminate\Routing\Router as IlluminateRouter;
 
 class Seonnet
@@ -103,7 +102,6 @@ class Seonnet
     if (!$route) $route = $this->getCurrentUrl();
     $route = $this->getRoute($route);
     if (!$route) return;
-
     return $route->metaTags;
   }
 

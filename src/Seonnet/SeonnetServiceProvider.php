@@ -27,11 +27,11 @@ class SeonnetServiceProvider extends ServiceProvider
 		// Bind database to the Model
 		Route::setConnectionResolver($app->db);
 
-		$this->app->singleton('seonnet', function($app) {
+		$this->app->singleton('seonnet', function ($app) {
 			return new Seonnet($app, $app['router']);
 		});
 
-		$this->app->singleton('seonnet.router', function($app) {
+		$this->app->singleton('seonnet.router', function ($app) {
 			return new Router($app);
 		});
 
@@ -44,7 +44,7 @@ class SeonnetServiceProvider extends ServiceProvider
 	{
 		$app = $this->app;
 
-		$app['command.seonnet.database'] = $app->share(function($app) {
+		$app['command.seonnet.database'] = $app->share(function ($app) {
 			return new Console\MakeTableCommand($app['files']);
 		});
 

@@ -4,8 +4,8 @@ namespace Seonnet\Console;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class MakeTableCommand extends Command {
-
+class MakeTableCommand extends Command
+{
   /**
    * The console command name.
    *
