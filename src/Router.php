@@ -31,7 +31,7 @@ class Router
       return $this->createRoute($method, $pattern, $action);
     }
 
-    return call_user_func_array(array(App::make('router'), $method), $parameters);
+    return call_user_func_array(array($this->app['router'], $method), $parameters);
   }
 
   /**
@@ -40,15 +40,20 @@ class Router
   protected function createRoute($method, $pattern, $action)
   {
     if (is_callable($action) or is_string($action)) {
-
       // Get the Route's slug
       $slug = $this->app['seonnet']->getSlug($pattern);
-      if (is_callable($action))   $action = array('as' => $pattern, 'do'   => $action);
-      elseif (is_string($action)) $action = array('as' => $pattern, 'uses' => $action);
+      if (is_callable($action)) {
+        $action = array('as' => $pattern, 'do' => $action);
+      } elseif (is_string($action)) {
+        $action = array('as' => $pattern, 'uses' => $action);
+      }
 
-      if ($slug) $pattern = $slug;
+      // Change the pattern to the slug
+      if ($slug) {
+        $pattern = $slug;
+      }
     }
 
-    return App::make('router')->$method($pattern, $action);
+    return $this->app['router']->$method($pattern, $action);
   }
 }
